@@ -38,7 +38,7 @@
 				
 				
 				echo '<script>';
-				echo 'location.href="../index.html"';
+				echo 'location.href="../home.html"';
 				echo '</script>';
 			}	
 			else{
@@ -49,7 +49,7 @@
 			{
 				echo '<script>';
 				echo 'alert("Enter a valid Email or password");';
-				echo 'location.href="../../views/login.php"';
+				echo 'location.href="../index.html"';
 				echo '</script>';
 			}	
 		
@@ -62,7 +62,7 @@
 		$_SESSION ['userTypeInTable'] = '';
 		
 		echo '<script>';
-		echo 'location.href="../login.html"';
+		echo 'location.href="../index.html"';
 		echo '</script>';
 	}
 ?>

@@ -1,215 +1,68 @@
+<?php
+		
+	if(isset($_GET['id']) && $_GET['id'] == "signout"){
+		
+		$_SESSION ['userIdInTable'] = '';
+		$_SESSION ['userNameInTable'] = '';
+				
+	}
+?>
+
 <!DOCTYPE html>
-<html data-ng-app="tracker">
+<html class="bg-black">
     <head>
         <meta charset="UTF-8">
-        <title>AdminLTE | Dashboard</title>
+        <title>AdminLTE | Log in</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <!-- Ionicons -->
-        <link href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-        <!-- Morris chart -->
-        <link href="css/morris/morris.css" rel="stylesheet" type="text/css" />
-        <!-- jvectormap -->
-        <link href="css/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-        <!-- Date Picker -->
-        <link href="css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-        <!-- Daterange picker -->
-        <link href="css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-        <!-- bootstrap wysihtml5 - text editor -->
-        <link href="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="css/AdminLTE.css" rel="stylesheet" type="text/css" />
 
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
     </head>
-    <body class="skin-blue" ng-controller="divChangeController">
-    
-        <!-- header logo: style can be found in header.less -->
-        <header class="header">
-            <div ng-include="'pages/header.html'"></div>
-        </header>
-        <div class="wrapper row-offcanvas row-offcanvas-left" >
-            <!-- Left side column. contains the logo and sidebar -->
-            
-			<div ng-include="'pages/sidebar.html'"></div>
+    <body class="bg-black">
 
-            <!-- Right side column. Contains the navbar and content of the page -->
-            <aside class="right-side">
-                <!-- Content Header (Page header)-->
-                <section class="content-header">
-                    <h1>
-                        Dashboard
-                        <small>Control panel</small>
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active">Dashboard</li>
-                    </ol>
-                </section>
+        <div class="form-box" id="login-box">
+            <div class="header">Sign In</div>
+            <form action="Source/loginValidate.php" method="post">
+                <div class="body bg-gray">
+                    <div class="form-group">
+                        <input type="text" name="userid" class="form-control" placeholder="User ID"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Password"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="remember_me"/> Remember me
+                    </div>
+                </div>
+                <div class="footer">
+                    <button type="submit" class="btn bg-olive btn-block" name="loginSubmit">Sign me in</button>
 
-                <!-- Main content -->
-                <section class="content">
+                    <p><a href="#">I forgot my password</a></p>
 
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div ng-include="'pages/tablets.html'"></div>
-                    </div><!-- /.row -->
+                    <a href="pages/examples/register.html" class="text-center">Register a new membership</a>
+                </div>
+            </form>
 
-                    <!-- Main row -->
-                    <div class="row">
+            <div class="margin text-center">
+                <span>Sign in using social networks</span>
+                <br/>
+                <button class="btn bg-light-blue btn-circle"><i class="fa fa-facebook"></i></button>
+                <button class="btn bg-aqua btn-circle"><i class="fa fa-twitter"></i></button>
+                <button class="btn bg-red btn-circle"><i class="fa fa-google-plus"></i></button>
 
-                        <!-- right col (We are only adding the ID to make the widgets sortable)
-                        <section class="col-lg-12 connectedSortable">
+            </div>
+        </div>
 
-                              <iframe src="pages/testMap.html" class="col-lg-12" height="800"></iframe>
-
-                        </section>  -->
-					<section class="col-lg-12 connectedSortable">	
-					
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="box box-danger">
-                                <div class="box-header">
-                                    <i class="fa fa-warning"></i>
-                                    <h3 class="box-title">Alerts</h3>
-                                </div><!-- /.box-header -->
-                                <div class="box-body">
-                                    <?php 
-                                        mysql_connect("localhost","root","root");
-                                        mysql_select_db('windguard') or die ("Not connected to the db");
-                                    ?>
-                                    <?php
-                                        $query = "select * from anamolies";
-                                        $result = mysql_query($query) or die(mysql_error());
-                                        while ($data = mysql_fetch_array($result)) 
-                                            {
-                                                $anomalyId = $data['anomalyId'];
-                                                $noOfLogs = $data['noOfLogs'];
-                                                $noOfCuts = $data['noOfCuts'];
-                                                $noOfMarijuana = $data['noOfMarijuana'];
-                                                $noOfAnamolies = $data['noOfAnamolies'];
-                                                $alertSend = $data['alertSend'];
-                                                $imageUrl = $data['imageUrl'];
-                                                $dateTime = $data['dateTime'];
-
-                                            
-                                                    if($noOfAnamolies > 50)
-                                                    {
-
-                                                        echo '
-                                                        <div class="alert alert-danger alert-dismissable">
-                                                            <i class="fa fa-ban"></i>
-                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                                            <b>Alert! &nbsp;</b>Heavy Forest Destruction taking place. Check this out.
-                                                        <div class="row">
-                                                        <div>
-                                                            <div align="" class="col-sm-4">
-                                                                <img src='.substr($imageUrl,3).' width="150" height="60">
-                                                            </div>
-                                                            <div align="" class="col-sm-6">
-                                                                    Detected on : '.$dateTime.' </br>
-                                                                    No of logs detected : '.$noOfLogs.'</br>
-                                                                    No of cuts detected : '.$noOfCuts.'</br>
-                                                                    No of Marijuana detected : '.$noOfMarijuana.'</br>
-                                                            </div>
-                                                            </div>
-                                                            </div>
-                                                         </div>';
-                                                         
-                                                        if($alertSend == "0")
-                                                        {
-                                                         $notificationId = uniqid();
-                                                         $query_notifications = "INSERT INTO notifications VALUES('".$notificationId."','.123.','".$anomalyId."','Heavy Damage Detected!','.0.','.1.','".$dateTime."')";
-                                                         mysql_query($query_notifications) or die(mysql_error());
-
-                                                    
-                                                        $query_anomalies = "UPDATE anamolies SET alertSend='.1.' WHERE anomalyId='".$anomalyId."'";
-                                                        mysql_query($query_anomalies) or die(mysql_error());
-                                                        }
-                                                    }
-                                                      
-                                                    else if($noOfAnamolies < 50 && $noOfAnamolies > 5)
-                                                        {
-                                                            echo'
-
-                                                            <div class="alert alert-warning alert-dismissable">
-                                                            <i class="fa fa-warning"></i>
-                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                                            <b>Alert! &nbsp;</b>Some anomalies detected. Check this out.
-                                                            <div class="row">
-                                                                <div>
-                                                                    <div align="" class="col-sm-4">
-                                                                         <img src='.substr($imageUrl,3).' width="150" height="60">
-                                                                    </div>
-                                                                    <div align="" class="col-sm-6">
-                                                                        Detected on : '.$dateTime.' </br>
-                                                                        No of logs detected : '.$noOfLogs.'</br>
-                                                                        No of cuts detected : '.$noOfCuts.'</br>
-                                                                        No of Marijuana detected : '.$noOfMarijuana.'</br>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> ';
-                                                        
-                                                        if($alertSend == "0")
-                                                        {
-                                                        $notificationId = uniqid();
-                                                        $query_notifications = "INSERT INTO notifications VALUES('".$notificationId."','.123.','".$anomalyId."','Some Anomalies Detected!','.0.','.2.','".$dateTime."')";
-                                                        mysql_query($query_notifications) or die(mysql_error());
-
-
-                                                        
-                                                        $query_anomalies = "UPDATE anamolies SET alertSend='.1.' WHERE anomalyId='".$anomalyId."'";
-                                                        mysql_query($query_anomalies) or die(mysql_error());
-                                                        }
-                                                    }
-
-                                                 }
-                                                
-                                        ?>
-                                
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box -->
-                        </div><!-- /.col -->
-
-                        <div class="col-md-6">
-                            <div class="box box-info">
-                                <div class="box-header">
-                                    <i class="fa fa-bullhorn"></i>
-                                    <h3 class="box-title">Callouts</h3>
-                                </div><!-- /.box-header -->
-                                <div class="box-body">
-                                    <div class="callout callout-danger">
-                                        <h4>I am a danger callout!</h4>
-                                        <p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                                    </div>
-                                    <div class="callout callout-info">
-                                        <h4>I am an info callout!</h4>
-                                        <p>Follow the steps to continue to payment.</p>
-                                    </div>
-                                    <div class="callout callout-warning">
-                                        <h4>I am a warning callout!</h4>
-                                        <p>This is a yellow callout.</p>
-                                    </div>
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box -->
-                        </div><!-- /.col -->
-                    </div> <!-- /.row -->
-					</section>	
-                    </div><!-- /.row (main row) -->
-
-                </section><!-- /.content -->
-            </aside><!-- /.right-side -->
-        </div><!-- ./wrapper -->
-
-        <script src="js/angular.js" type="text/javascript"></script>
-        <script src="js/controllers/div-change-controller.js" type="text/javascript"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-        <script src="js/AdminLTE/app.js" type="text/javascript"></script>
-
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
 
     </body>
 </html>
