@@ -1,3 +1,16 @@
+<?php
+	session_start();
+	
+	$userNameInTable = $_SESSION ['userNameInTable'];
+	$userIdInTable = $_SESSION ['userIdInTable'];
+	$userTypeInTable = $_SESSION ['userTypeInTable'];
+	
+	mysql_connect("localhost","root","root");
+	mysql_select_db('windguard') or die("Not connected to the db");
+
+ ?>
+
+
 <aside class="left-side sidebar-offcanvas">
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
@@ -7,7 +20,7 @@
                             <img src="img/avatar3.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, Jane</p>
+                            <p>Hello, <?php echo $userNameInTable ?></p>
 
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>

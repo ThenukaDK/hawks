@@ -1,3 +1,15 @@
+<?php
+	session_start();
+	
+	$userNameInTable = $_SESSION ['userNameInTable'];
+	$userIdInTable = $_SESSION ['userIdInTable'];
+	$userTypeInTable = $_SESSION ['userTypeInTable'];
+	
+	mysql_connect("localhost","root","root");
+	mysql_select_db('windguard') or die("Not connected to the db");
+
+ ?>
+
 <a href="home.html" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
                 WindGuard
@@ -236,14 +248,16 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Jane Doe <i class="caret"></i></span>
+                                <span>
+								<?php echo $userNameInTable ?>
+								<i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-light-blue">
                                     <img src="img/avatar3.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        Jane Doe - Web Developer
+                                        <?php echo $userNameInTable ?> - Web Developer
                                         <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>
