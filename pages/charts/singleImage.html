@@ -1,4 +1,7 @@
-<!DOCTYPE html>                                                                                                                                                                                                                              <!DOCTYPE html>
+
+<!-- File to detect single image-->
+<!DOCTYPE html>    
+
 <html data-ng-app="tracker">
     <head>
         <meta charset="UTF-8">
@@ -16,7 +19,21 @@
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+
         <![endif]-->
+     <style type="text/css">
+            img {
+    transition: -webkit-transform 0.25s ease;
+    height: 500px;
+    width: 1000px;
+    margin-top: 50px;
+   margin-left: 50px;
+}
+
+img:active {
+    -webkit-transform: scale(2);
+}
+        </style> 
     </head>
     <body class="skin-blue" ng-controller="divChangeController">
         <!-- header logo: style can be found in header.less -->
@@ -140,39 +157,31 @@
                 </section>
                 <!-- /.sidebar -->
             </aside>
-=======
-			<div ng-include="'../sidebar.html'"></div>
->>>>>>> dbc9a9823ee376d6a6cbefb55a0b6c908abb4d33
 
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
-                <!-- Content Header (Page header) -->
-                <section class="content-header" style="margin-top: 50px">
-                    <h1>
-                        Aerial Maps
-                        <small>preview samples</small>							
-							<form name="test" method="post" action="../../Py/exec.php">							
-								<button type="submit" class="btn btn-danger" name="detectbtn">
-							<span style="color:#CC6699;"></span>Detect Anomalies
-						</button>
-					
-			</form>
-                    </h1>
-                    
-                </section>
-
-                <!-- Main content -->
+            
                 <?php
 					
 					mysql_connect("localhost","root","root");
 					mysql_select_db('windguard') or die ("Not connected to the db");
 					
-                    $query = "select * from image_map";
+
+                    $imageUrl = $_GET['id'];
+
+                   
+                    $query = "select * from anamolies where imageUrl='$imageUrl'";
                     $result = mysql_query($query) or die(mysql_error());
                     while ($data = mysql_fetch_array($result)) 
                     {
-                        $imageMapId = $data['imageMapId'];
-						$url = $data['imageUrl'];
+                        $anomalyId = $data['anomalyId'];
+                        $noOfLogs = $data['noOfLogs'];
+                        $noOfCuts = $data['noOfCuts'];
+                        $noOfMarijuana = $data['noOfMarijuana'];
+                        $noOfAnamolies = $data['noOfAnamolies'];
+                        $alertSend = $data['alertSend'];
+                        $imageUrl = $data['imageUrl'];
+                        $dateTime = $data['dateTime'];
 						
 						echo ' 
 						
@@ -181,13 +190,21 @@
 								<div class="col-xs-12">
 									<div class="box box-primary">
 										<div class="box-header">      
-											<h3 class="box-title">ID :'.$imageMapId.' </h3>
-											<img src="../'.$url.'">
+											<img src="../'.$imageUrl.'">
+                                                <div align="" class="col-sm-6">
+                                                    <h3>
+                                                                        Detected on : '.$dateTime.' </br>
+                                                                        No of logs detected : '.$noOfLogs.'</br>
+                                                                        No of cuts detected : '.$noOfCuts.'</br>
+                                                                        No of Marijuana detected : '.$noOfMarijuana.'</br>
+                                                    </h3>
+                                                </div>
 										</div>                               
 									</div>
 								</div>
 							</div>
 						</section>';
+
                     }                    
 				
 				?>
