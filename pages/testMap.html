@@ -1,0 +1,47 @@
+<style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script>
+// This example creates a 2-pixel-wide red polyline showing
+// the path of William Kingsford Smith's first trans-Pacific flight between
+// Oakland, CA, and Brisbane, Australia.
+
+function initialize() {
+  var mapOptions = {
+    zoom: 11,
+    center: new google.maps.LatLng(8.368936, 80.160713),
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  };
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  var flightPlanCoordinates = [
+    new google.maps.LatLng(8.368936, 80.160713),
+    new google.maps.LatLng(8.366219, 79.871635),
+    new google.maps.LatLng(8.397467, 79.875069),
+    new google.maps.LatLng(8.406298, 80.142860),
+	new google.maps.LatLng(8.379126, 80.153847)
+  ];
+  var flightPath = new google.maps.Polyline({
+    path: flightPlanCoordinates,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
+
+  flightPath.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+ 
+    <div id="map-canvas"></div>
