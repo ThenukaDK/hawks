@@ -97,24 +97,26 @@
                                                     {
 
                                                         echo '
+                                                        <a href="pages/charts/singleImage.html?id='.$imageUrl.'">
                                                         <div class="alert alert-danger alert-dismissable">
                                                             <i class="fa fa-ban"></i>
                                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                                             <b>Alert! &nbsp;</b>Heavy Forest Destruction taking place. Check this out.
-                                                        <div class="row">
-                                                        <div>
-                                                            <div align="" class="col-sm-4">
-                                                                <img src='.substr($imageUrl,3).' width="150" height="60">
+                                                            <div class="row">
+                                                                <div>
+                                                                    <div align="" class="col-sm-4">
+                                                                        <img src='.substr($imageUrl,3).' width="150" height="60">
+                                                                    </div>
+                                                                    <div align="" class="col-sm-6">
+                                                                        Detected on : '.$dateTime.' </br>
+                                                                        No of logs detected : '.$noOfLogs.'</br>
+                                                                        No of cuts detected : '.$noOfCuts.'</br>
+                                                                        No of Marijuana detected : '.$noOfMarijuana.'</br>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div align="" class="col-sm-6">
-                                                                    Detected on : '.$dateTime.' </br>
-                                                                    No of logs detected : '.$noOfLogs.'</br>
-                                                                    No of cuts detected : '.$noOfCuts.'</br>
-                                                                    No of Marijuana detected : '.$noOfMarijuana.'</br>
-                                                            </div>
-                                                            </div>
-                                                            </div>
-                                                         </div>';
+                                                         </div>
+                                                        </a>';
                                                          
                                                         if($alertSend == "0")
                                                         {
@@ -131,7 +133,7 @@
                                                     else if($noOfAnamolies < 50 && $noOfAnamolies > 5)
                                                         {
                                                             echo'
-
+                                                            <a href="pages/charts/singleImage.html?id='.$imageUrl.'">
                                                             <div class="alert alert-warning alert-dismissable">
                                                             <i class="fa fa-warning"></i>
                                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -149,7 +151,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div> ';
+                                                        </div> </a>';
                                                         
                                                         if($alertSend == "0")
                                                         {
