@@ -1,9 +1,26 @@
 <div class="col-lg-3 col-xs-6">
+ <?php 
+        mysql_connect("localhost","root","root");
+        mysql_select_db('windguard') or die ("Not connected to the db");
+?>
+ <?php
+        $query1 = "select * from anamolies";
+        $result1 = mysql_query($query1) or die(mysql_error());
+        $rows1 = mysql_num_rows($result1); 
+
+        $query2 = "select * from image_map";
+        $result2 = mysql_query($query2) or die(mysql_error());
+        $rows2 = mysql_num_rows($result2);
+
+        $query3 = "select * from copters where status=1";
+        $result3 = mysql_query($query3) or die(mysql_error());
+        $rows3 = mysql_num_rows($result3);
+?>
                             <!-- small box -->
                             <div class="small-box bg-aqua">
                                 <div class="inner">
                                     <h3>
-                                        4
+                                        <?php echo $rows2; ?>
                                     </h3>
                                     <p>
                                         Image maps
@@ -22,10 +39,10 @@
                             <div class="small-box bg-green">
                                 <div class="inner">
                                     <h3>
-                                        5
+                                         <?php echo $rows1; ?>
                                     </h3>
                                     <p>
-                                        Annomalies detected
+                                        Annomaly maps
                                     </p>
                                 </div>
                                 <div class="icon">
@@ -41,7 +58,7 @@
                             <div class="small-box bg-yellow">
                                 <div class="inner">
                                     <h3>
-                                        5
+                                        <?php echo $rows3; ?>
                                     </h3>
                                     <p>
                                         Drones
@@ -50,7 +67,7 @@
                                 <div class="icon">
                                     <i class="ion ion-plane"></i>
                                 </div>
-                                <a href="pages/testMap.html" class="small-box-footer">
+                                <a href="pages/charts/drones.html" class="small-box-footer">
                                     More info <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
