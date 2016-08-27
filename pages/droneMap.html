@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <title>Google Maps Multiple Markers</title> 
+  
+  <style>
+      html, body, #map {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+  
+  <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBumwZ73Q0TZx2tIq-_ZMIdxHACp061Pnc"
+          type="text/javascript"></script>
+</head> 
+<body>
+  <div id="map" ></div>
+
+  <script type="text/javascript">
+    var locations = [
+      ['Drone1', 8.368936, 80.160713 , 1], 
+      ['Drone2', 8.366219, 79.871635 , 2],
+      ['Drone3', 8.397467, 79.875069 , 3],
+      ['Drone4', 8.406298, 80.142860 , 4],
+      ['Drone5', 8.379126, 80.153847 , 5]
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 11,
+      center: new google.maps.LatLng(8.368936, 80.160713),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  </script>
+</body>
+</html>
