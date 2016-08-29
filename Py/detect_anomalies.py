@@ -5,6 +5,7 @@ import datetime
 import uuid
 import MySQLdb
 
+
 #connect to DB
 db = MySQLdb.connect(host="127.0.0.1",
                      user="root",         
@@ -12,10 +13,12 @@ db = MySQLdb.connect(host="127.0.0.1",
                      db="windguard")
 cur = db.cursor()
 
+#load relevant cascade files
 log_cascade = cv2.CascadeClassifier("CascadeLogs130x130_10Stages.xml")
 cut_cascade = cv2.CascadeClassifier("stage11.xml")
 
 
+#for each file in directory execute cascade test
 for filename in os.listdir("../img/imagemap"):
     count_logs = 0
     count_cuts = 0
@@ -40,27 +43,29 @@ for filename in os.listdir("../img/imagemap"):
         
         
                
-    #rename the file with date and time stamp
-    anomalyId = str(uuid.uuid4())
-    notificationId = str(uuid.uuid4())
-    dateTime =time.strftime("%Y%m%d-%H%M%S")
-    new_name = dateTime + anomalyId
-    cv2.imwrite("../img/detected_images/"+new_name+".jpg",img)
+#rename the file with date and time stamp
+anomalyId = str(uuid.uuid4())
+notificationId = str(uuid.uuid4())
+dateTime =time.strftime("%Y%m%d-%H%M%S")
+new_name = dateTime + anomalyId
+cv2.imwrite("../img/detected_images/"+new_name+".jpg",img)
 
-    #anamolies
-    total_anomalies = count_logs + count_cuts
-    print (count_logs)
-    print (count_cuts)
-    print(new_name)
+#anamolies
+total_anomalies = count_logs + count_cuts
+print (count_logs)
+print (count_cuts)
+print(new_name)
 
-    #send image url to database
-    add_image_url = ("INSERT INTO anamolies ""(anomalyId, imageMapId, noOfAnamolies,noOfLogs, noOfCuts, noOfMarijuana, alertSend, imageUrl, dateTime) ""VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)")
-    data_image_url = (anomalyId, '123', total_anomalies,count_logs,count_cuts,'0','0','../img/detected_images/'+new_name+'.jpg', datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'))
-    cur.execute(add_image_url,data_image_url)
-    
-    #send notification to table
-    add_notification = ("INSERT INTO notifications ""(notificationId, imageMapId, anomalyId,notification, notificationSend, notificationType, dateTime) ""VALUES (%s, %s, %s, %s, %s, %s, %s)")
-    data_notification = (notificationId, '123', anomalyId,'New Anamoly Maps Created','0','4',datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'))
-    cur.execute(add_notification ,data_notification)
+#send image url to database
+add_image_url = ("INSERT INTO anamolies ""(anomalyId, imageMapId, noOfAnamolies,noOfLogs, noOfCuts, noOfMarijuana, alertSend, imageUrl, dateTime) ""VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)")
+data_image_url = (anomalyId, '123', total_anomalies,count_logs,count_cuts,'0','0','../img/detected_images/'+new_name+'.jpg', datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'))
+cur.execute(add_image_url,data_image_url)
+
+
+#send notification to table
+add_notification = ("INSERT INTO notifications ""(notificationId, imageMapId, anomalyId,notification, notificationSend, notificationType, dateTime) ""VALUES (%s, %s, %s, %s, %s, %s, %s)")
+data_notification = (notificationId, '123', anomalyId,'New Anamoly Maps Created','0','4',datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'))
+cur.execute(add_notification ,data_notification)
+
 db.close()
 
