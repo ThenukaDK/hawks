@@ -12,9 +12,11 @@ db = MySQLdb.connect(host="127.0.0.1",
                      user="root",         
                      passwd="root",  
                      db="windguard")
+
+#start database cursor
 cur = db.cursor()
 
-
+#count .jpg files in specified directory
 def countFiles():
     nameArray = []
     count = 0
@@ -24,9 +26,10 @@ def countFiles():
              count = count + 1
     return count, nameArray
 
-
+#function call to count files
 fileCount, names = countFiles()
 
+#get 4 files each and stich 
 for i in range(0,fileCount,4):
     imageA = cv2.imread(names[i])
     imageB = cv2.imread(names[i+1])

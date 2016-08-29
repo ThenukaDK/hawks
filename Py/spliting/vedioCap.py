@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import os
 
+#get file names listed in vedio directory
 def getFileNames():
     fileCount = countFiles()
 
@@ -14,6 +15,7 @@ def getFileNames():
 
     return fileArray
 
+#count number of avi files inside directory
 def countFiles():
     count = 0
     for filename in os.listdir("../../img/video/"):
@@ -21,10 +23,12 @@ def countFiles():
              count = count + 1
     return count
 
-
+#execute getfiles method 
 files = getFileNames()
 
 count = 0
+
+#for each .avi file in directory splitt vedios into frames
 for filename in files:
 
     location = "../../img/video/"+str(filename)

@@ -13,6 +13,7 @@ h=int(capture.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT ))
 fourcc = cv2.cv.CV_FOURCC(*'XVID')  
 video_writer = cv2.VideoWriter("../../img/video/output.avi", fourcc, 8, (w, h)) 
 
+#sleep one second
 def waitSeconds():
     time.sleep(1)
 
