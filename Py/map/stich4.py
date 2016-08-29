@@ -2,6 +2,17 @@ from panorama import Stitcher
 import imutils
 import cv2
 import os
+import time
+import datetime
+import uuid
+import MySQLdb
+
+#connect to DB
+db = MySQLdb.connect(host="127.0.0.1",
+                     user="root",         
+                     passwd="root",  
+                     db="windguard")
+cur = db.cursor()
 
 
 def countFiles():
@@ -36,8 +47,20 @@ for i in range(0,fileCount,4):
     stitcher = Stitcher()
     (result3, vis3) = stitcher.stitch([imageE, imageF], showMatches=True)
 
-    cv2.imwrite("../../img/imagemap/4stichedimages"+str(i)+".jpg", result3)
+    #rename the file with date and time stamp
+    anomalyId = str(uuid.uuid4())
+    notificationId = str(uuid.uuid4())
+    dateTime =time.strftime("%Y%m%d-%H%M%S")
+    new_name = dateTime + anomalyId
+    cv2.imwrite("../../img/imagemap/"+new_name+".jpg",result3)
+
+    #send image url to database
+    add_image_url = ("INSERT INTO image_map ""(imageMapId, poleId, copterId, longitude, latitude, imageUrl, dateTime) ""VALUES (%s, %s, %s, %s, %s, %s, %s)")
+    data_image_url = (anomalyId, '123'+str(i), i, '85.55','6.35', "../../img/imagemap/"+new_name+".jpg" ,datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'))
+    cur.execute(add_image_url,data_image_url)
 
 cv2.waitKey(0)
+
+
 
 
