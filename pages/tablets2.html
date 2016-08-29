@@ -4,11 +4,11 @@
         mysql_select_db('windguard') or die ("Not connected to the db");
 ?>
  <?php
-        $query1 = "select * from anamolies";
+        $query1 = "select * from anamolies limit 5";
         $result1 = mysql_query($query1) or die(mysql_error());
         $rows1 = mysql_num_rows($result1); 
 
-        $query2 = "select * from image_map";
+        $query2 = "select * from messages";
         $result2 = mysql_query($query2) or die(mysql_error());
         $rows2 = mysql_num_rows($result2);
 
@@ -20,16 +20,16 @@
                             <div class="small-box bg-aqua">
                                 <div class="inner">
                                     <h3>
-                                        <?php echo $rows2; ?>
+                                        <?php echo $rows1; ?>
                                     </h3>
                                     <p>
-                                        Image maps
+                                       Weekly Feed
                                     </p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-image"></i>
                                 </div>
-                                <a href="pages/charts/flot.html" class="small-box-footer">
+                                <a href="pages/charts/flot2.html" class="small-box-footer">
                                     More maps <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -39,16 +39,16 @@
                             <div class="small-box bg-green">
                                 <div class="inner">
                                     <h3>
-                                         <?php echo $rows1; ?>
+                                         <?php echo $rows2; ?>
                                     </h3>
                                     <p>
-                                        Annomaly maps
+                                        Messages
                                     </p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="pages/charts/annomalies.html" class="small-box-footer">
+                                <a href="pages/charts/messages2.html" class="small-box-footer">
                                     More info <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
