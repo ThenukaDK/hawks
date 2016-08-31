@@ -4,7 +4,8 @@ import os
 import zipfile
 from Crypto import Random
 from Crypto.Cipher import AES
-
+import glob  
+import shutil
 
 
 #------------ encryption function start ---------------------------
@@ -53,6 +54,55 @@ path = "./pic/"		#path to picture folder to be send
 
 
 
+
+
+#-----------------------------------zip started ----------------------------------------
+print("zipping.....")
+
+src = "C:/Users/slax/Desktop/com_realtime_zipadded/client_server/client/pic"  
+#dst = "C:\Users\slax\Desktop\com_realtime_2\client_server\client\pic"
+
+
+
+def zipFile(src):   
+    if not (os.path.exists(src)):  # Check if folder exists 
+        return False  
+  
+    ListOfP = glob.glob(src + '*.jpg') # Get a list of Pictures  
+    for p in ListOfP:  
+        newZipFN = p[:-3] + 'zip'   # Create an output zip file name from Pictures 
+        if (os.path.exists(newZipFN)):  # Check if output zipfile exists, delete it  
+            os.remove(newZipFN)  
+            if (os.path.exists(newZipFN)):  
+                return False  
+   
+        zipobj = zipfile.ZipFile(newZipFN,'w')  # Create zip file object 
+        for infile in glob.glob( p.lower().replace(".jpg",".*")): 
+            if infile.lower() != newZipFN.lower() :  
+                zipobj.write(infile,os.path.basename(infile),zipfile.ZIP_DEFLATED)  # Avoid zipping the zip file!   
+        zipobj.close()  
+    return True  
+
+
+
+# delete zip files in zip folder
+def delete():
+    fileList = os.listdir(dst)
+    for fileName in fileList:
+            os.remove(dst+"/"+fileName)
+
+
+
+zipFile(src)
+
+
+
+#-----------------------------------zip end ----------------------------------------
+
+
+
+
+
 #--------------------------------- encryption start --------------------------------- 
 
 
@@ -64,12 +114,17 @@ fileNames = os.listdir( path )			#get all fille names in path directry
 
 for file in fileNames:					#encrypt and delete orginal file
 
-	completePath=path+file 				#get the file path and file name
-	print("Encrypting: ",file)
-	encrypt_file(completePath, key)		#encrypting file
-	print("Deleting: ",file)
-	os.remove(completePath)				#delete orginal file
-	print('')
+	if(file[-3:]!="enc"):
+		
+		print(file[-3:])
+
+		completePath=path+file 				#get the file path and file name
+		print("Encrypting: ",file)
+		encrypt_file(completePath, key)		#encrypting file
+
+		print("Deleting: ",file)
+		os.remove(completePath)				#delete orginal file
+		print('')
 
 #--------------------------------- encryption end --------------------------------- 
 

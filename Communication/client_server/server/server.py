@@ -4,6 +4,7 @@ import os
 import zipfile
 from Crypto import Random
 from Crypto.Cipher import AES
+import shutil
 
 
 #------------ encryption function start ---------------------------
@@ -109,6 +110,29 @@ while True:
 
     sc.close()
 s.close()
+
+
+
+
+
+#-----------------------uzip start ---------------------------
+
+def unzip():
+    dir_name = 'C:/Users/slax/Desktop/com_realtime_zipadded/client_server/server/rec'
+    extension = ".zip"
+    os.chdir(dir_name) # change directory from working dir to dir with files
+
+    for item in os.listdir(dir_name): # loop through items in dir
+        if item.endswith(extension): 
+            file_name = os.path.abspath(item) # get full path of files
+            zip_ref = zipfile.ZipFile(file_name) # create zipfile object
+            zip_ref.extractall(dir_name) # extract file to dir
+            zip_ref.close() 
+            os.remove(file_name) # delete zipped file
+
+unzip()
+#-----------------------unzip end ---------------------------
+
 
 
 print("\n################## Ending Server file #################\n")

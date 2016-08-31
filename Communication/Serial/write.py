@@ -1,13 +1,10 @@
 #!/usr/bin/python
 import serial
-#import syslog
 import time
 import base64
-
-
-
-
 import os, sys
+
+
 
 path = "./in/"
 dirs = os.listdir( path )
@@ -19,25 +16,25 @@ print()
 
 for pic in dirs:
 
+#convert image to base64 string
 	fullPath=path+pic
 	print("\nsending file ",fullPath,"\n")
 	image = open(fullPath, 'rb')
 	image_read = image.read()
 	image_64_encode = base64.encodestring(image_read)
 
-	#print(image_64_encode)
 
 	print()
 	print()
 
+	#send star for ending image
 	x=image_64_encode
-	#x=x.replace(" ", "")
 	x=str(x)
 	x=x+"*"
 	print(x)
 
-	#The following line is for serial over GPIO
-	port = 'COM11' # note I'm using Mac OS-X
+
+	port = 'COM11' 
 
 
 	y=[]
@@ -52,11 +49,9 @@ for pic in dirs:
 
 		a=k
 		b=a+jump
-		#print("a %d b %d"%(a,b))
 		y.append([''.join(x[a:b])])
 		k=k+jump
 		
-
 	p=0
 
 	print("No of characters to send : %d"%len(x))
@@ -66,11 +61,10 @@ for pic in dirs:
 	print()
 
 	for i in y:
-		#print(i)
 
 		p=p+1
 		ard = serial.Serial(port,9600,timeout=5)
-		time.sleep(2) # wait for Arduino
+		time.sleep(2) 
 
 		sending=str(i)
 		sending=sending+sending[-1:]
@@ -80,7 +74,7 @@ for pic in dirs:
 		print("-------------------------------------------- %d %%"%(p/len(y)*100))
 
 		ard.write(sending)
-		time.sleep(1) # I shortened this to match the new value in your Arduino code
+		time.sleep(1) 
 		ard.close()
 
 

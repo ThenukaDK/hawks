@@ -2,7 +2,7 @@ import serial
 import time
 import base64
 
-PORT = 'COM20' # The port my Arduino is on, on my WinXP box.
+PORT = 'COM32' # The port my Arduino is on
 
 print("start reading data on port",PORT)
 
@@ -19,7 +19,6 @@ while True:
         st=ser.readline()
         print(st)
 
-
         fo = open(tempPath+"split8.txt", "ab")
         fo.write(st)
         fo.close()
@@ -27,6 +26,7 @@ while True:
         pp=st
         pp=pp.decode("utf-8") 
 
+        #if the star detected it will end 
         if(pp.find("*")!=-1):
             print("exiting")
             break
@@ -35,7 +35,7 @@ ser.close()
 
 
 
-
+#combind parts
 with open(tempPath+"split8.txt") as f:
     content = f.readlines()
 k=""
@@ -50,13 +50,10 @@ k=k.replace('*', '')
 k=k[:-1]
 print(k)
 
-# print("type is ",type(k))
 
 # # Open a file
 fo = open(tempPath+"t2.txt", "w")
 fo.write(k);
-
-# Close opend file
 fo.close()
 
 
@@ -65,19 +62,17 @@ image_read = image.read()
 image.close()
 print(image_read)
 
+
+#add padding correction
+
 def decode_base64(data):
-    """Decode base64, padding being optional.
 
-    :param data: Base64 data as an ASCII byte string
-    :returns: The decoded byte string.
-
-    """
     missing_padding = len(data) % 4
     if missing_padding != 0:
         data += b'='* (4 - missing_padding)
     return base64.decodestring(data)
 
-# image_64_decode = base64.decodestring(image_read)
+
 image_result = open(outPath+'1.jpg', 'wb') # create a writable image and write the decoding result
 image_result.write(decode_base64(image_read ))
 
