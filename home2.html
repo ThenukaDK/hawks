@@ -1,7 +1,7 @@
 <?php
 	
-
 	session_start();
+	
 	if(isset($_GET['id']) && $_GET['id'] == "signout" && $_SESSION ['userIdInTable'] == ''){
 		
 		echo 'location.href="../index.html"';
@@ -11,7 +11,6 @@
 ?>
 <?php
  $userType = $_SESSION ['userTypeInTable'];
- 
  ?>
 
 <!DOCTYPE html>
@@ -42,12 +41,12 @@
     <body class="skin-blue" ng-controller="divChangeController">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
-            <div ng-include="'pages/header.html'"></div>
+            <div ng-include="'pages/header2.html'"></div>
         </header>
         <div class="wrapper row-offcanvas row-offcanvas-left" >
             <!-- Left side column. contains the logo and sidebar -->
             
-			<div ng-include="'pages/sidebar.html'"></div>
+			<div ng-include="'pages/sidebar2.html'"></div>
 
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
@@ -71,7 +70,7 @@
 
                     <!-- Small boxes (Stat box) -->
                     <div class="row">
-                        <div ng-include="'pages/tablets.html'"></div>
+                        <div ng-include="'pages/tablets2.html'"></div>
                     </div><!-- /.row -->
 
                     <!-- Main row -->
@@ -93,7 +92,7 @@
                                     <h3 class="box-title">Alerts</h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
-                                    <?php 
+                                 <?php 
                                         mysql_connect("localhost","root","root");
                                         mysql_select_db('windguard') or die ("Not connected to the db");
                                     ?>
@@ -193,7 +192,53 @@
                             </div><!-- /.box -->
                         </div><!-- /.col -->
 
+                          <div class="col-md-6">
+                            <div class="box box-info">
+                                <div class="box-header">
+                                    <i class="fa fa-bullhorn"></i>
+                                    <h3 class="box-title">Message Box</h3>
+                                </div><!-- /.box-header -->
+                                <div class="box-body">
+                                <?php
+    mysql_connect("localhost","root","root") or die("not cncted");
+    mysql_select_db('windguard') or die("Not connected to the db") or die("not concted");
+
+
+      $query="select * from  messages" ;  
+         $result = mysql_query($query) or die("not run");
+
+
+        $numOfRows = mysql_num_rows($result);
+        // Include the database 
+        
+        
+        // Select all the links from the database
+if($numOfRows>0) 
+{       
                         
+        while($row = mysql_fetch_array($result))
+            {
+                $messageId = $row['messageId'];
+                $subject = $row['subject'];
+                $message= $row['message'];
+                $reply = $row['reply'];
+                $dateTime = $row['dateTime'];
+                $replyDateTime =$row['replyDateTime'];
+                $userName = $row['userName'];
+                echo '
+                <div>
+                    <i style="color: black;"><b>'.$userName.' &nbsp;  &nbsp;  &nbsp;  &nbsp;  '.$dateTime.'</b></i></br>
+                    <span style="border-bottom: 2px;"> Subject -'.$subject.'</br> Message - '.$message.'</span>
+                    <hr>
+                    
+                </div>
+            ';
+
+            }
+}
+
+            
+    ?>
                     </div> <!-- /.row -->
 					</section>	
                     </div><!-- /.row (main row) -->

@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	
-	$dbhost = "127.0.0.1";
+	$dbhost = "localhost";
 	$dbuser = "root";
 	$dbpass = "root";
 	$errMsg = "";
@@ -36,10 +36,18 @@
 				$_SESSION ['userNameInTable'] = $userNameInTable;
 				$_SESSION ['userTypeInTable'] = $userTypeInTable;
 				
-				
-				echo '<script>';
-				echo 'location.href="../home.html"';
-				echo '</script>';
+				if ($userTypeInTable == "Admin")
+				{
+					echo '<script>';
+					echo 'location.href="../home.html"';
+					echo '</script>';
+				}
+				else
+				{
+					echo '<script>';
+					echo 'location.href="../home2.html"';
+					echo '</script>';
+				}
 			}	
 			else{
 				$errMsg = 'Error. User email or Passwrod incorrect';
@@ -65,4 +73,6 @@
 		echo 'location.href="../index.html"';
 		echo '</script>';
 	}
+
+	
 ?>

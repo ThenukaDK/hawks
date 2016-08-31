@@ -296,67 +296,16 @@
                     <ul class="sidebar-menu">
                         <li class="active">
                             <a href="pages/forms/general.html">
-                                <i class="fa fa-plus"></i> <span>Add New Tracker</span>
+                                <i class="fa fa-plus"></i> <span>Add Drone</span>
                             </a>
                         </li>
 						
 						<li class="active">
                             <a href="pages/forms/general.html">
-                                <i class="fa fa-plus"></i> <span>Add Resources Type</span>
+                                <i class="fa fa-plus"></i> <span>Add charging Node</span>
                             </a>
                         </li>
-
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-check"></i>
-                                <span>Online Trackers</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Tracker001</a></li>
-                                <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Tracker002</a></li>
-                                <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Tracker003</a></li>
-                                <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Tracker004</a></li>
-                                <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Tracker005</a></li>
-                                <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Tracker006</a></li>
-                                <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Tracker007</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-truck"></i>
-                                <span>Resource Types</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Boat</a></li>
-                                <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Bus</a></li>
-                                <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Train</a></li>
-                                <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Taxi</a></li>
-                                <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Domestic Vehicles</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-edit"></i> <span>Paths Annalyzer</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
-                                <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
-                                <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-table"></i> <span>Routien Tables</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
-                                <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
-                            </ul>
-                        </li>
+                   
 
                         <li>
                             <a href="pages/mailbox.html">
@@ -374,13 +323,9 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Add a new Tracker
+                        Add a Drone
                         <small>Device Details</small>
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                        <li><a href="#">Add Tracker</a></li> 
-                    </ol>
+                    </h1> 
                 </section>
 
                 <!-- Main content -->
@@ -391,18 +336,18 @@
                             <!-- general form elements -->
                             <div class="box box-primary">
                                 <div class="box-header">
-                                    <h3 class="box-title">Tracking Details</h3>
+                                    <h3 class="box-title">Drone details</h3>
                                 </div><!-- /.box-header -->
                                 <!-- form start -->
                                 <form role="form">
                                     <div class="box-body">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Device ID</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter unique ID">
+                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter unique ID">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">MAC</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="MAC address of the Device">
+                                            <label for="exampleInputPassword1">Model</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Model of the Device">
                                         </div>
                                     </div><!-- /.box-body -->
 
@@ -415,188 +360,27 @@
                             <!-- Form Element sizes -->
                             <div class="box box-success">
                                 <div class="box-header">
-                                    <h3 class="box-title">Tracking Device Details</h3>
+                                    <h3 class="box-title">Model Details</h3>
                                 </div>
                                 <div class="box-body">
                                     <div class="form-group">
-                                            <label for="exampleInputEmail1">Device Name</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Product">
+                                            <label for="exampleInputEmail1">Power</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Power">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Technology</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="EX: Smart Tracker">
+                                            <label for="exampleInputPassword1">Range</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Range">
                                         </div>
 										<div class="form-group">
-                                            <label for="exampleInputPassword1">Power</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Used Power">
+                                            <label for="exampleInputPassword1">Time of Fly</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="flying time">
                                         </div>
                                     
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
 
-                            <div class="box box-danger">
-                                <div class="box-header">
-                                    <h3 class="box-title">Device Type</h3>
-                                </div>
-                                <div class="box-body">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <input type="radio">
-                                                </span>
-                                                <input type="text" value="Smart Phone" class="form-control" disabled>
-                                            </div><!-- /input-group -->
-                                        </div><!-- /.col-lg-6 -->
-										<div class="col-lg-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <input type="radio">
-                                                </span>
-                                                <input type="text" value="Stationary Device" class="form-control" disabled>
-                                            </div><!-- /input-group -->
-                                        </div><!-- /.col-lg-6 -->
-                                    </div>
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box -->
+                            
 
-                            <!-- Input addon -->
-                            <div class="box box-info">
-                                <div class="box-header">
-                                    <h3 class="box-title">Input Addon</h3>
-                                </div>
-                                <div class="box-body">
-                                    <h4>With checkbox and radio inputs</h4>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <input type="checkbox">
-                                                </span>
-                                                <input type="text" class="form-control">
-                                            </div><!-- /input-group -->
-                                        </div><!-- /.col-lg-6 -->
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <input type="radio">
-                                                </span>
-                                                <input type="text" class="form-control">
-                                            </div><!-- /input-group -->
-                                        </div><!-- /.col-lg-6 -->
-                                    </div><!-- /.row -->
-
-                                    <h4>With buttons</h4>
-                                    <p class="margin">Large: <code>.input-group.input-group-lg</code></p>
-                                    <div class="input-group input-group-lg">
-                                        <div class="input-group-btn">
-                                            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">Action <span class="fa fa-caret-down"></span></button>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">Action</a></li>
-                                                <li><a href="#">Another action</a></li>
-                                                <li><a href="#">Something else here</a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="#">Separated link</a></li>
-                                            </ul>
-                                        </div><!-- /btn-group -->
-                                        <input type="text" class="form-control">
-                                    </div><!-- /input-group -->
-                                    <p class="margin">Normal</p>
-                                    <div class="input-group">
-                                        <div class="input-group-btn">
-                                            <button type="button" class="btn btn-danger">Action</button>
-                                        </div><!-- /btn-group -->
-                                        <input type="text" class="form-control">
-                                    </div><!-- /input-group -->
-                                    <p class="margin">Small <code>.input-group.input-group-sm</code></p>
-                                    <div class="input-group input-group-sm">
-                                        <input type="text" class="form-control">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-info btn-flat" type="button">Go!</button>
-                                        </span>
-                                    </div><!-- /input-group -->
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box -->
-
-                        </div><!--/.col (left) -->
-                        <!-- right column -->
-                        <div class="col-md-6">
-                            <!-- general form elements disabled -->
-                            <div class="box box-warning">
-                                <div class="box-header">
-                                    <h3 class="box-title">Handler Details</h3>
-                                </div><!-- /.box-header -->
-                                <div class="box-body">
-                                    <form role="form">
-                                        <!-- text input -->
-                                        <div class="form-group">
-                                            <label>Handler Name</label>
-                                            <input type="text" class="form-control" placeholder="Name of the handler(driver)"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Handler ID</label>
-                                            <input type="text" class="form-control" placeholder="handler unique ID" />
-                                        </div>
-										<div class="form-group">
-                                            <label>Contact No</label>
-                                            <input type="text" class="form-control" placeholder="Mobile no preffered" />
-                                        </div>
-
-                                        <!-- textarea -->
-                                        <div class="form-group">
-                                            <label>Handler Address</label>
-                                            <textarea class="form-control" rows="3" placeholder="Residential Address"></textarea>
-                                        </div>
-                                       
-
-                                        <!-- radio -->
-                                        <div class="form-group">
-											<label>Marital status</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                                    Married
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                                    Single
-                                                </label>
-                                            </div>
-                                            
-                                        </div>
-								<div class="box box-primary">
-                                <div class="box-header">
-                                    <h3 class="box-title">Job Status</h3>
-                                </div><!-- /.box-header -->
-                                <!-- form start -->
-                                <form role="form">
-                                    <div class="box-body">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Position</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter unique ID">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">MAC</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="MAC address of the Device">
-                                        </div>
-                                    </div><!-- /.box-body -->
-
-                                    <!--<div class="box-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>-->
-                                </form>
-                            </div><!-- /.box -->
-                                       
-
-                                        
-
-                                    </form>
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box -->
-                        </div><!--/.col (right) -->
-                    </div>   <!-- /.row -->
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
