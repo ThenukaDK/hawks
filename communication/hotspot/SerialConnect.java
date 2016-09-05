@@ -166,15 +166,11 @@ public class SerialConnect implements SerialPortEventListener {
 
             System.out.println("-- Starting WLAN --");
             netshCommand = "netsh wlan start hostednetwork";
-
             Process p2 = Runtime.getRuntime().exec(cmd + " " + netshCommand);
  
 
             System.out.println("-- Finished --");
 
-//            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//            Date date = new Date();
-//            String timestamp = dateFormat.format(date);
 
         } catch (Exception ex) {
             System.out.println("Error creating hotspot");
@@ -189,26 +185,11 @@ public class SerialConnect implements SerialPortEventListener {
 
                  
             String netshCommand = "netsh wlan stop hostednetwork";
-
             Process p2 = Runtime.getRuntime().exec(cmd + " " + netshCommand);
     
 
             System.out.println("-- Finished --");
 
-                    //cliview.setText(cliview.getText() + "\n" + "Hotspot stoped");
-                    //remove hotspot end
-            //get date and time
-//            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//            Date date = new Date();
-//            String timestamp = dateFormat.format(date);
-
-            //recode fly time             
-           // dbConnect dbcon = new dbConnect();
-            //dbcon.addToDB("charge1", "flyStamp", timestamp);
-            //System.out.println("fly timestamp test " + timestamp);
-
-            //cliview.setText(cliview.getText() + "\n" + "Fly time " + timestamp + " recoded");
-            //System.out.println("stoped in else");
 
         } catch (Exception ex) {
             System.out.println("Error stoping hotspot");
